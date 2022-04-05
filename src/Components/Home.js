@@ -1,9 +1,24 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import styled from 'styled-components';
 import Imgslider from './Imgslider';
 import Viewers from './Viewers';
 import Movies from './Movies';
+
+import {db,collection,onSnapshot,doc} from '../Firebase'
+import { useDispatch } from 'react-redux'
+import {setMovies} from '../features/Movies/MovieSlice';
+import userEvent from '@testing-library/user-event';
 function Home() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    const colref=collection(db,"movies");
+    onSnapshot(colref,(snanshot)=>{
+      let tempmovies=snanshot.docs.map((doc)=>{
+          return {id:doc.id,...doc.data()};
+      });
+      dispatch(setMovies(tempmovies));
+    });
+  },[]);
   return (
     <div>
       <Container>

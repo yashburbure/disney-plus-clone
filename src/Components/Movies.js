@@ -1,22 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { selectMovies } from '../features/Movies/MovieSlice';
+import {useSelector} from "react-redux";
 function Movies() {
+  const movies=useSelector(selectMovies);
+  // console.log("This is movies",movies);
   return(
     <Container>
         <h4>Recommended for you</h4>
         <Content>
-          <Wrap>
-            <img src="https://images.unsplash.com/photo-1524008279394-3aed4643b30b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"/>          
-          </Wrap>
-          <Wrap>
-            <img src="https://images.unsplash.com/photo-1524008279394-3aed4643b30b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"/>          
-          </Wrap>
-          <Wrap>
-            <img src="https://images.unsplash.com/photo-1524008279394-3aed4643b30b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"/>          
-          </Wrap>
-          <Wrap>
-            <img src="https://images.unsplash.com/photo-1524008279394-3aed4643b30b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"/>          
-          </Wrap> 
+          {movies &&
+            movies.map((movie)=>(
+              <Wrap key={movie.id}>
+                <img src={movie.cardImg}/>
+              </Wrap>
+            ))
+          } 
         </Content>
     </Container>
   )
@@ -48,7 +47,7 @@ const Wrap=styled.div`
   &:hover{
     box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
       rgb(0 0 0 / 72%) 0px 30px 22px -10px;
-    transform:scale(1.05);
+    // transform:scale(1.01);
     border-color:rgba(249,249,249,0.8);
   }
 `;
