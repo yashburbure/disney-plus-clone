@@ -1,13 +1,30 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import styled from 'styled-components';
+import {useParams} from "react-router-dom"; 
+import {db,collection,onSnapshot,doc,getDoc} from "../Firebase";
 function Detail() {
+  const {id}=useParams();
+  // console.log(id);
+  const [movie,setmovie]=useState();
+  useEffect(()=>{
+    const docref=doc(db,"movies",id);
+    getDoc(docref)
+      .then((document)=>{
+        console.log(document.data());
+        setmovie(document.data());
+      })
+  },[]);
+  // console.log("Movie is what???",movie);
   return(
     <Container>
-      <Background>
-        <img src="https://4.bp.blogspot.com/-KuWXfA_2zEw/WsPYrBXXXOI/AAAAAAAAVyw/1cMGP21yZcU5Y9uEKNGHuu5LabzGdKGfwCLcBGAs/s1600/Bao-Lead-Image.jpg"/>
+      {
+        movie&&
+        <>
+        <Background>
+        <img src={movie.backgroundImg}/>
       </Background>
       <ImageTitle>
-        <img src="https://www.transparentpng.com/thumb/disney/mI9A46-cinderella-castle-disney-transparent-picture.png"/>
+        <img src={movie.cardImg}/>
       </ImageTitle>
       <Controls>
         <PlayButton>
@@ -26,11 +43,15 @@ function Detail() {
         </GroupWatchButton>
       </Controls>
       <SubTitle>
-        2018 * 7m * Family, Fantasy, Kids, Animation
+        {movie.subTitle}
       </SubTitle>
       <Description>
-      An aging Chinese mom suffering from empty nest syndrome gets another chance at motherhood when one of her dumplings springs to life as a lively, giggly dumpling boy.
+        {movie.description}
       </Description>
+        
+        </>
+        
+      }
     </Container>
 
   ) 

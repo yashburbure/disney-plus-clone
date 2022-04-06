@@ -1,15 +1,7 @@
-// // import { initializeApp } from "firebase/app";
-// // import { getStorage } from "firebase/storage";
-// // import { getDatabase } from "firebase/database";
-// // import { GoogleAuthProvider,getAuth } from "firebase/auth";
-// // import { collection,onSnapshot, doc, setDoc } from "firebase/firestore"; 
-
-
-
 import {initializeApp} from "firebase/app";
-import {collection,onSnapshot,doc,setDoc, getFirestore} from "firebase/firestore";
+import {collection,onSnapshot,doc,setDoc, getFirestore,getDoc} from "firebase/firestore";
 import { getDatabase } from "firebase/database";
-// import {getAuth,GoogleAuthProvider} from "firebase/auth";
+import {getAuth,GoogleAuthProvider,signOut,onAuthStateChanged} from "firebase/auth";
 import {getStorage} from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyC6DcIUCdYCSlRdluZlftR5_FxaCB0nnik",
@@ -24,7 +16,7 @@ const firebaseConfig = {
 
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
-// const auth = getAuth();
-// const provider = new GoogleAuthProvider();
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 // const storage = getStorage(firebaseApp);
-export {db,collection,onSnapshot,doc};
+export {db,collection,onSnapshot,doc,getDoc,auth,provider,signOut,onAuthStateChanged};

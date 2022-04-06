@@ -12,6 +12,7 @@ import {
   Link
 } from "react-router-dom";
 function App() {
+  
   return (
     <div className="App">
       <Router>
@@ -19,7 +20,7 @@ function App() {
         <Routes>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path='/' element={<Home />} />
-          <Route exact path='/detail' element={<Detail />} />
+          <Route exact path='/detail/:id' element={<Detail />} />
         </Routes>
       </Router>
     </div>
